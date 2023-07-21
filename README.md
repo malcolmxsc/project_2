@@ -3,8 +3,9 @@ The Fitness Tracker is a simple web application that allows the user to Log dail
 
 # Screenshot
 
-<img src="https://imgur.com/XrLnT6i">
-<img src="https://imgur.com/BniL7ca">
+https://imgur.com/XrLnT6i
+https://imgur.com/BniL7ca
+
 
 # Technologies Used
 
