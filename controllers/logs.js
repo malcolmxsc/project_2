@@ -6,6 +6,9 @@ module.exports = {
   show,
   newLog,
   create,
+  destroy,
+  edit,
+  update,
 };
 
 async function index(req, res) {
@@ -13,7 +16,7 @@ async function index(req, res) {
     const usersWithLogs = await User.find({ exercise: { $exists: true } }).populate(
       'exercise'
     );
-    res.render('logs/', { title: 'Daily Logs', usersWithLogs });
+    res.render('logs/index', { title: 'Daily Logs', usersWithLogs });
   } catch (error) {
     res.status(500).send('Error fetching logs from the database.');
   }
@@ -28,12 +31,8 @@ async function create(req, res) {
     const { username, exerciseNotes, exerciseTime, exerciseType, date } = req.body;
 
     // Create a new Exercise document
-    const exercise = await Exercise.create(req.body)//({
-      // exerciseNotes,
-      // exerciseTime,
-      // exerciseType,
-      // date,
-    //});
+    const exercise = await Exercise.create(req.body)
+     
     console.log(exercise)
 
     // Find the user by their username
@@ -55,18 +54,77 @@ async function create(req, res) {
     res.status(500).send('Error creating a new log entry.');
   }
 }
-
 async function show(req, res) {
   try {
     const { id } = req.params;
-    const user = await User.findById(id).populate('log');
+    const logEntry = await Exercise.findById(id);
+    
 
-    if (!user) {
-      return res.status(404).send('User not found.');
+    if (!logEntry) {
+      return res.status(404).send('Log entry not found.');
     }
 
-    res.render('logs/show', { title: 'Log Details', user });
+    res.render('logs/show', { title: 'Log Details', logEntry });
   } catch (error) {
-    res.status(500).send('Error fetching user log details.');
+    res.status(500).send('Error fetching log entry details.');
+  }
+}
+
+
+
+
+async function destroy(req, res) {
+
+  await Exercise.findOneAndDelete({_id: req.params.id})
+ 
+  res.redirect('/logs');
+ 
+
+}
+
+
+async function edit(req, res) {
+  try {
+    const { id } = req.params;
+    const logEntry = await Exercise.findById(id);
+
+    if (!logEntry) {
+      return res.status(404).send('Log entry not found.');
+    }
+
+    res.render('logs/edit', { title: 'Edit Log', logEntry });
+  } catch (error) {
+    res.status(500).send('Error fetching log entry details.');
+  }
+}
+
+
+async function update(req, res) {
+  try {
+    const { id } = req.params;
+    const { exerciseNotes, exerciseTime, exerciseType } = req.body;
+
+    // Find the exercise log by its ObjectId and update it
+    const updatedLogEntry = await Exercise.findByIdAndUpdate(
+      id,
+      {
+        exerciseNotes,
+        exerciseTime,
+        exerciseType,
+      },
+      { new: true } // This option returns the updated document
+    );
+
+    if (!updatedLogEntry) {
+      return res.status(404).send('Log entry not found.');
+    }
+
+    console.log('Updated log entry:', updatedLogEntry);
+
+    // Redirect to the show page or any other appropriate location
+    res.redirect('/logs/' + id);
+  } catch (error) {
+    console.error('Error updating log entry:', error);
+    res.status(500).send('Error updating log entry.');
   }
 }

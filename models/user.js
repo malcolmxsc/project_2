@@ -15,8 +15,8 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Exercise'
 
-  }], // Array of log entries
-  // Other user properties...
+  }], 
+  
 });
 
 const User = mongoose.model('User', userSchema);

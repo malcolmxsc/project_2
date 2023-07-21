@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+
+<h2>Edit Log Entry</h2>
+
+
+<form id="edit-form" action="/logs/<%= logEntry._id %>?_method=PUT" method="POST">
+  <label for="exerciseNotes">Exercise Notes:</label>
+  <textarea name="exerciseNotes" id="exerciseNotes"><%= logEntry.exerciseNotes %></textarea>
+
+  <label for="exerciseTime">Exercise Time (minutes):</label>
+  <input type="number" name="exerciseTime" id="exerciseTime" value="<%= logEntry.exerciseTime %>">
+
+  <label for="exerciseType">Exercise Type:</label>
+  <select id="exerciseType" name="exerciseType">
+    <option value="Strength" <%= logEntry.exerciseType === 'Strength' ? 'selected' : '' %>>Strength</option>
+    <option value="Aerobic" <%= logEntry.exerciseType === 'Aerobic' ? 'selected' : '' %>>Aerobic</option>
+    <option value="Swimming" <%= logEntry.exerciseType === 'Swimming' ? 'selected' : '' %>>Swimming</option>
+    <option value="Yoga" <%= logEntry.exerciseType === 'Yoga' ? 'selected' : '' %>>Yoga</option>
+  </select>
+
+  <!-- Add other input fields and labels as needed -->
+
+  <!-- Use the same method-override technique as in the create form -->
+  <input type="hidden" value="PUT">
+  
+
+  <button type="submit">Update Log</button>
+</form>
+
+<%- include('../partials/footer') %>

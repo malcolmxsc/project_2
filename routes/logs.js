@@ -8,10 +8,20 @@ router.get('/', logsCtrl.index);
 // GET /logs/new (show the form to create a new log)
 router.get('/new', logsCtrl.newLog);
 
-// GET /logs/:id (display a specific log)
-router.get('/:id', logsCtrl.show);
-
 // POST /logs (create a new log)
 router.post('/', logsCtrl.create);
 
-module.exports = router;
+// GET /logs/:id (display a specific log)
+router.get('/:id', logsCtrl.show);
+
+// DELETE /logs/:id (delete a specific log)
+router.delete('/:id', logsCtrl.destroy);
+// DELETE /logs/:id (delete a specific log)
+router.get('/:id/edit',logsCtrl.edit);
+
+router.put('/:id', logsCtrl.update);
+
+
+
+
+module.exports = router
