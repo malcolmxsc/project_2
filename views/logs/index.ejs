@@ -13,7 +13,7 @@
   <% } else { %>
     <% usersWithLogs.forEach(user => { %>
       <ul class="list-group mb-4">
-        <% user.exercise.forEach(logEntry => { %>
+        <% user.exercise.sort((a, b) => b.date - a.date).forEach(logEntry => { %>
           <li class="list-group-item">
             <strong>Date:</strong> <%= logEntry.date.toLocaleDateString('en-US') %><br>
             <strong>Exercise:</strong> <%= logEntry.exerciseType %><br>
@@ -22,9 +22,6 @@
             <strong>ID:</strong> <%= logEntry._id %><br>
 
             <a href="/logs/<%= logEntry._id %>" class="btn btn-info">DETAILS</a>
-
-            
-
           </li>
         <% }); %>
       </ul>

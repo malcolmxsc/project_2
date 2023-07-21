@@ -5,32 +5,51 @@
 <form id="new-form" action="/body" method="POST">
   <div>
     <label for="height">Height (cm):</label>
-    <input type="number" id="height" name="heightCM" step="0.01" min="1" required>
+    <input type="number" id="height" name="heightCM" step="1" min="1" max="270" required>
   </div>
   <br>
 
-  <!-- Add the BMI field -->
-  <div>
-    <label for="BMI">BMI:</label>
-    <input type="number" id="BMI" name="BMI" step="0.01" min="1" required>
-  </div>
-  <br>
-
+  
   <div>
     <label for="weight">Weight (kg):</label>
-    <input type="number" id="weight" name="weight" step="0.01" min="1" required>
+    <input type="number" id="weight" name="weight" step="1" min="1" max="600" required>
   </div>
   <br>
 
   <div>
     <label for="age">Age:</label>
-    <input type="number" id="age" name="age" min="1" required>
+    <input type="number" id="age" name="age" min="1" max="125" required>
   </div>
   <br>
 
+  <!-- Added a hidden input field to store the calculated BMI value -->
+  <input type="hidden" id="BMI" name="BMI" value="">
+  
   <div>
-    <input type="submit" value="Add Body Entry">
+    <input type="submit" value="Update body stats">
   </div>
 </form>
+
+<script>
+  // JavaScript code to calculate the BMI and update the hidden input field
+  const heightInput = document.getElementById('height');
+  const weightInput = document.getElementById('weight');
+  const bmiInput = document.getElementById('BMI');
+
+  function calculateBMI() {
+    const heightCM = parseFloat(heightInput.value);
+    const weightKG = parseFloat(weightInput.value);
+    
+    if (!isNaN(heightCM) && !isNaN(weightKG) && heightCM > 0 && weightKG > 0) {
+      const bmi = (weightKG / ((heightCM / 100) * (heightCM / 100))).toFixed(2);
+      bmiInput.value = bmi;
+    } else {
+      bmiInput.value = "";
+    }
+  }
+
+  heightInput.addEventListener('input', calculateBMI);
+  weightInput.addEventListener('input', calculateBMI);
+</script>
 
 <%- include('../partials/footer') %>
