@@ -6,14 +6,12 @@ var logger = require('morgan');
 var session = require("express-session");
 var passport = require("passport");
 var methodOverride = require("method-override");
-
 require('dotenv').config();
-// connect to the database with AFTER the config vars are processed
 require('./config/database');
-// require config/passport
 require("./config/passport");
 
 const indexRouter = require('./routes/index');
+const logsRouter = require('./routes/logs');
 
 var app = express();
 
@@ -26,26 +24,28 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(methodOverride('_method'))
-// middleware for generating sessions and signing them with .env SECRET
+app.use(methodOverride('_method'));
+
+// Session Middleware
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true
-}))
+}));
 
-// PASSPORT MIDDLEWARE
+// Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-// ADD req.user TO ALL VIEWS
+// Add req.user to all views
 app.use(function(req, res, next) {
   res.locals.user = req.user;
   next();
-})
+});
 
 // ROUTES BEGIN HERE
 app.use('/', indexRouter);
+app.use('/logs', logsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

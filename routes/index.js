@@ -4,7 +4,8 @@ const passport = require("passport");
 
 // This app has no "home" page, but your projects should 😀
 router.get('/', function(req, res, next) {
-  res.render("index", {title: "Home Page"})
+  
+  res.render("index", {title: "check routes for this input"})
 });
 
 // Google OAuth Route login route
@@ -24,15 +25,15 @@ router.get("/auth/google", passport.authenticate(
 router.get("/oauth2callback", passport.authenticate(
   "google",
   {
-    successRedirect: "/",
-    failureRedirect: "/"
+    successRedirect: "/logs",
+    failureRedirect: "/logs"
   }
 ))
 
 // OAuth logout route
 router.get("/logout", function(req,res) {
   req.logout(function() {
-    res.redirect("/")
+    res.redirect("/logs")
   });
 });
 

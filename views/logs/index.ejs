@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+
+<!-- logs/index.ejs -->
+
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+  <a href="/logs/new">New Log</a>
+
+    <% if (usersWithLogs.length === 0) { %>
+        <p>No logs found.</p>
+    <% } else { %>
+        <% usersWithLogs.forEach(user => { %>
+            <ul>
+                <% user.exercise.forEach(logEntry => { %>
+                    <li>
+                        Date: <%= logEntry.date %><br>
+                        Exercise: <%= logEntry.exerciseType %><br>
+                        Duration: <%= logEntry.exerciseTime %> minutes<br>
+                        Note: <%= logEntry.exerciseNotes %> Notes<br>
+                        <!-- Add any other log properties you want to display -->
+                    </li>
+                <% }); %>
+            </ul>
+        <% }); %>
+    <% } %>
+</body>
+</html>
+  
+<%- include('../partials/footer') %>
