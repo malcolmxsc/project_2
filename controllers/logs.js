@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Exercise = require('../models/exercise');
 
+
 module.exports = {
   index,
   show,
@@ -33,7 +34,7 @@ async function create(req, res) {
     // Create a new Exercise document
     const exercise = await Exercise.create(req.body)
      
-    console.log(exercise)
+    
 
     // Find the user by their username
     let user = await User.findOne({_id:req.user._id});
@@ -42,7 +43,7 @@ async function create(req, res) {
       // If the user doesn't exist, create a new user
       user = new User({ username });
     }
-    console.log(user)
+    
     // Add the new exercise to the user's log array
     user.exercise.push(exercise);
 
@@ -64,7 +65,7 @@ async function show(req, res) {
       return res.status(404).send('Log entry not found.');
     }
 
-    res.render('logs/show', { title: 'Log Details', logEntry });
+    res.render('logs/show', { title: 'Exercise Details', logEntry });
   } catch (error) {
     res.status(500).send('Error fetching log entry details.');
   }

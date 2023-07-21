@@ -19,7 +19,7 @@
                         Date: <%= logEntry.date.toLocaleDateString('en-GB') %><br>
                         
                         Exercise: <%= logEntry.exerciseType %><br>
-                        Duration: <%= logEntry.exerciseTime %><br>
+                        Exercise Time: <%= logEntry.exerciseTime %> (minutes)<br>
                         Note: <%= logEntry.exerciseNotes %><br>
                         ID: <%= logEntry._id %><br>
         
@@ -27,12 +27,8 @@
                         <a href="/logs/<%= logEntry._id %>">DETAILS</a>
                         
                         <!-- Add any other log properties you want to display -->
-                        <form action="/logs/<%= logEntry._id %>?_method=delete" method="POST" style="display: inline;">
-                          <input type="hidden"  value="delete">
-                          <button type="submit">Delete</button>
-                        </form>
 
-                        <a href="/logs/<%= logEntry._id %>/edit">EDIT</a>
+                        
 
                         
                         
