@@ -1,5 +1,14 @@
-<%- include('./partials/header') %>
+<%- include(basePath + '/partials/header') %>
+<main class="container">
+  <div class="row">
+    <% if (user) { %>
+      <h2>Hello <%= user.name %>,</h2>
+      <p>Welcome to your fitness tracker!</p>
+    <% } else { %>
+      <h2>Hello,</h2>
+      <p>Please sign in to access your fitness tracker.</p>
+    <% } %>
+  </div>
+</main>
 
-
-
-<%- include('./partials/footer') %>
+<%- include(basePath + '/partials/footer') %>

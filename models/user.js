@@ -15,8 +15,13 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Exercise'
 
-  }], 
+  }],
   
+  body: {
+    type: Schema.Types.ObjectId,
+    ref: 'Body',
+  },
+
 });
 
 const User = mongoose.model('User', userSchema);

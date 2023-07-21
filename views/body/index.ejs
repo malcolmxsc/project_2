@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <h2><%= title %></h2>
+
+  <% if (body) { %>
+    <div class="row">
+      <div class="col">
+        <strong>Height (cm):</strong> <%= body.heightCM %>
+      </div>
+      <div class="col">
+        <strong>BMI:</strong> <%= body.BMI %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <strong>Weight (kg):</strong> <%= body.weight %>
+      </div>
+      <div class="col">
+        <strong>Age:</strong> <%= body.age %>
+      </div>
+    </div>
+  <% } else { %>
+    <p>No body entry found.</p>
+  <% } %>
+
+  <a href="/body/new" class="btn btn-primary mt-3">Update your BMI</a>
+</div>
+
+<%- include('../partials/footer') %>
+
+

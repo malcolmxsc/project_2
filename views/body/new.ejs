@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+
+<h2>Enter Your Body Information</h2>
+
+<form id="new-form" action="/body" method="POST">
+  <div>
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height" name="heightCM" step="0.01" min="1" required>
+  </div>
+  <br>
+
+  <!-- Add the BMI field -->
+  <div>
+    <label for="BMI">BMI:</label>
+    <input type="number" id="BMI" name="BMI" step="0.01" min="1" required>
+  </div>
+  <br>
+
+  <div>
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" name="weight" step="0.01" min="1" required>
+  </div>
+  <br>
+
+  <div>
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" min="1" required>
+  </div>
+  <br>
+
+  <div>
+    <input type="submit" value="Add Body Entry">
+  </div>
+</form>
+
+<%- include('../partials/footer') %>

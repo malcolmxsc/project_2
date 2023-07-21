@@ -2,45 +2,34 @@
 
 <!-- logs/index.ejs -->
 
-<html>
-<head>
-    <title><%= title %></title>
-</head>
-<body>
-  <a href="/logs/new">New Log</a>
+<div class="container">
+  <h2>Exercise Logs</h2>
 
-    <% if (usersWithLogs.length === 0) { %>
-        <p>No logs found.</p>
-    <% } else { %>
-        <% usersWithLogs.forEach(user => { %>
-            <ul>
-                <% user.exercise.forEach(logEntry => { %>
-                    <li>
-                        Date: <%= logEntry.date.toLocaleDateString('en-GB') %><br>
-                        
-                        Exercise: <%= logEntry.exerciseType %><br>
-                        Exercise Time: <%= logEntry.exerciseTime %> (minutes)<br>
-                        Note: <%= logEntry.exerciseNotes %><br>
-                        ID: <%= logEntry._id %><br>
-        
-                        
-                        <a href="/logs/<%= logEntry._id %>">DETAILS</a>
-                        
-                        <!-- Add any other log properties you want to display -->
+  <!-- New Workout Log Button -->
+  <a href="/logs/new" class="btn btn-primary mb-3">New Workout Log</a>
 
-                        
+  <% if (usersWithLogs.length === 0) { %>
+    <p>No logs found.</p>
+  <% } else { %>
+    <% usersWithLogs.forEach(user => { %>
+      <ul class="list-group mb-4">
+        <% user.exercise.forEach(logEntry => { %>
+          <li class="list-group-item">
+            <strong>Date:</strong> <%= logEntry.date.toLocaleDateString('en-US') %><br>
+            <strong>Exercise:</strong> <%= logEntry.exerciseType %><br>
+            <strong>Exercise Time:</strong> <%= logEntry.exerciseTime %> (minutes)<br>
+            <strong>Note:</strong> <%= logEntry.exerciseNotes %><br>
+            <strong>ID:</strong> <%= logEntry._id %><br>
 
-                        
-                        
-                       
+            <a href="/logs/<%= logEntry._id %>" class="btn btn-info">DETAILS</a>
 
-                        
-                    </li>
-                <% }); %>
-            </ul>
+            
+
+          </li>
         <% }); %>
-    <% } %>
-</body>
-</html>
-  
+      </ul>
+    <% }); %>
+  <% } %>
+</div>
+
 <%- include('../partials/footer') %>

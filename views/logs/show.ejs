@@ -1,23 +1,26 @@
 <%- include('../partials/header') %>
 
+<div class="container">
+  <% if (!logEntry) { %>
+    <p>Exercise not found.</p>
+  <% } else { %>
+    <div>
+      <h3>Exercise Date: <%= logEntry.date.toLocaleDateString('en-GB') %></h3>
+      <p>Exercise Type: <%= logEntry.exerciseType %></p>
+      <p>Exercise Notes: <%= logEntry.exerciseNotes %></p>
+      <p>Exercise Time: <%= logEntry.exerciseTime %> (minutes)</p>
+      <!-- Add any other log properties you want to display -->
+    </div>
 
-<% if (!logEntry) { %>
-  <p>Exercise not found.</p>
-<% } else { %>
-  <div>
-    <h3>Exercise Date: <%= logEntry.date.toLocaleDateString('en-GB') %></h3>
-    <p>Exercise Type: <%= logEntry.exerciseType %></p>
-    <p>Exercise Notes: <%= logEntry.exerciseNotes %></p>
-    <p> Exercise Time: <%= logEntry.exerciseTime %> (minutes)</p>
-    <!-- Add any other log properties you want to display -->
-  </div>
+    <!-- Delete Button -->
+    <form action="/logs/<%= logEntry._id %>?_method=delete" method="POST" class="d-inline">
+      <input type="hidden" name="_method" value="DELETE">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
 
-  <form action="/logs/<%= logEntry._id %>?_method=delete" method="POST" style="display: inline;">
-    <input type="hidden"  value="delete">
-    <button type="submit">Delete</button>
-  </form>
-
-  <a href="/logs/<%= logEntry._id %>/edit">EDIT</a>
-<% } %>
+    <!-- Edit Button -->
+    <a href="/logs/<%= logEntry._id %>/edit" class="btn btn-primary">Edit</a>
+  <% } %>
+</div>
 
 <%- include('../partials/footer') %>
