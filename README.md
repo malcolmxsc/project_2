@@ -14,7 +14,8 @@ https://imgur.com/BniL7ca
 - CSS
 - Bootstrap
 - ChatGPT for errors
-- 
+- Express
+- MongoDB
 
 # Getting Started
 
